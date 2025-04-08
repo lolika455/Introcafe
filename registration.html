@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="registration.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+<body>
+    <div id="registration-container">
+        <h1>Registration</h1>
+        <form id="registration-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="submit">Register</button>
+            <br>
+            <br>
+            <button onclick="document.location='index.html'" id="back-to-home"><svg width="50px" height="50px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 10L8 14L6 14L-2.62268e-07 8L6 2L8 2L8 6L16 6L16 10L8 10Z" fill="#000000"/>
+                </svg></button>
+        </form>
+    </div>
+    <div id="success-container" style="display: none;">
+        <img id="logo" src="logo_dark.png" alt="Logo">
+        <h2>Your login QR code</h2>
+        <canvas id="qr-code"></canvas>
+    </div>
+    <script src="registration.js"></script>
+</body>
+</html>
