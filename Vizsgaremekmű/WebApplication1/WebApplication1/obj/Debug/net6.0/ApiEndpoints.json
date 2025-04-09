@@ -1,0 +1,12 @@
+[
+  {
+    "ContainingType": "WebApplication1.Controllers.IntrocafeController",
+    "Method": "GetOrdersNoUser",
+    "RelativePath": "api/getordersnouser",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]
