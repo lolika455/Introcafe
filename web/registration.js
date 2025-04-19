@@ -3,6 +3,7 @@ document.getElementById("registration-form").addEventListener("submit", function
 
     // Get form data
     const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
     // Hide the registration form and show the success container
@@ -14,8 +15,9 @@ document.getElementById("registration-form").addEventListener("submit", function
     successMessage.textContent = "Your login QR code";
 
     // QR code generation csinál a megadott username és password alapján
-    const qrData = `Username: ${username}\nPassword: ${password}`;
+    const qrData = `Username: ${username} \nEmail: ${email}\nPassword: ${password}`;
     generateQRCode(qrData);
+    console.log("QR code data:", qrData);
 });
 
 function generateQRCode(data) {
@@ -30,3 +32,4 @@ function generateQRCode(data) {
         }
     });
 }
+

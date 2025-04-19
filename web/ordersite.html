@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introcafe</title>
+  <link rel="stylesheet" href="ordercss.css" />
+  <script src="orderjs.js"></script> 
+</head>
+<body>
+  <header>
+    <img src="./ect/logo_dark.png" alt="Logo">
+  </header>
+
+  <div class="main-container">
+    <div class="product-list">
+      <h2>Items</h2>
+      <div class="product-grid">
+        <div class="product-item" onclick="addToCart('Espresso', 500)">
+          <span>Espresso</span>
+          <span>500 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Latte', 700)">
+          <span>Latte</span>
+          <span>700 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Cappuccino', 750)">
+          <span>Cappuccino</span>
+          <span>750 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Americano', 600)">
+          <span>Americano</span>
+          <span>600 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Matcha Latte', 800)">
+          <span>Matcha Latte</span>
+          <span>800 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Pisztáciás muffin', 750)">
+          <span>Pisztáciás muffin</span>
+          <span>750 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Forró csoki', 750)">
+          <span>Forró csoki</span>
+          <span>750 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Forró csoki (fehércsoki)', 800)">
+          <span>Forró csoki (fehércsoki)</span>
+          <span>800 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Fekete tea', 600)">
+          <span>Fekete tea</span>
+          <span>600 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Zöld tea', 600)">
+          <span>Zöld tea</span>
+          <span>600 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Caramel Frappucino', 1300)">
+          <span>Caramel Frappucino</span>
+          <span>1300 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Csokoládés Croissant', 850)">
+          <span>Csokoládés Croissant</span>
+          <span>850 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Sajtos-Sonkás Szendvics', 1000)">
+          <span>Sajtos-Sonkás Szendvics</span>
+          <span>1000 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Tojásos-Baconös Szendvics', 1000)">
+          <span>Tojásos-Baconös Szendvics</span>
+          <span>1000 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Cortado', 700)">
+          <span>Cortado</span>
+          <span>700 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Ír kávé', 950)">
+          <span>Ír kávé</span>
+          <span>950 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Jeges Kávé Vanília Fagylaltal', 900)">
+          <span>Jeges Kávé Vanília Fagylaltal</span>
+          <span>900 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Dupla Espresso', 850)">
+          <span>Dupla Espresso</span>
+          <span>850 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Bodzás Limonádé', 900)">
+          <span>Bodzás Limonádé</span>
+          <span>900 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Levendula-Áfonyás Limonádé', 900)">
+          <span>Levendula-Áfonyás Limonádé</span>
+          <span>900 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Narancsos Limonádé', 900)">
+          <span>Narancsos Limonádé</span>
+          <span>900 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Eper-Bazsalikomos Limonádé', 900)">
+          <span>Eper-Bazsalikomos Limonádé</span>
+          <span>900 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Citrom-Limeos Limonádé', 900)">
+          <span>Citrom-Limeos Limonádé</span>
+          <span>900 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Mangó-Maracujás Limonádé', 900)">
+          <span>Mangó-Maracujás Limonádé</span>
+          <span>900 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Pepsi Cola 330ml', 400)">
+          <span>Pepsi Cola 330ml</span>
+          <span>400 Ft</span>
+        </div>
+        <div class="product-item" onclick="addToCart('Pepsi Cola 500ml', 550)">
+          <span>Pepsi Cola 500ml</span>
+          <span>550 Ft</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart">
+      <h2>Your Cart</h2>
+      <ul id="cart-list"></ul>
+      <button onclick="checkout()" id="checkout-button">Checkout</button>
+    </div>
+  </div>
+</body>
+</html>
