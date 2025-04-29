@@ -6,6 +6,7 @@
     <title>Introcafe</title>
     <link rel="stylesheet" href="./css/ordercss.css" />
     <script src="./js/orderjs.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div id="order-type-modal" class="modal">
@@ -19,8 +20,21 @@
             </div>
         </div>
     </div>
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <h2>Kosár</h2>
+            <ul id="cart-modal-list"></ul>
+            <h2 id="cart-modal-total-price">Végösszeg: 0 Ft</h2>
+            <button onclick="checkout()" class="checkout">Rendelés leadása</button>
+            <button onclick="closeCartModal()" class="cancel">Bezárás</button>
+        </div>
+    </div>
     <header>
-        <img src="./img/logo_dark.png" class="logobro" alt="Logo">
+        <img src="./img/logo_dark.png" class="header-img" alt="Logo">
+        <div class="cart-icon-link" onclick="showCartModal()">
+            <img src="./img/cart.png" class="cart-icon" alt="Cart Icon">
+            <span id="cart-counter" class="cart-counter">0</span>
+        </div>
     </header>
 
     <div class="main-container">
@@ -79,16 +93,9 @@
                 </div>
             </div>
         </div>
-
-        <div class="cart">
-            <h2>Kosár</h2>
-            <ul id="cart-list"></ul>
-            <h2 id="total-price">Végösszeg: 0 Ft</h2>
-            <button onclick="checkout()" class="checkout" id="checkout-button">Rendelés leadása</button>
-            <a href="./index.html">
-                <button onclick="cancel()" class="cancel" id="cancel-button">Rendelés törlése</button>
-            </a>
-        </div>
     </div>
+    <a href="./index.html">
+        <button onclick="cancel()" class="cancel" id="cancel-button">Rendelés törlése</button>
+    </a>
 </body>
 </html>

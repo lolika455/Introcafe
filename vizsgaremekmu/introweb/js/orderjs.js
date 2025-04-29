@@ -1,12 +1,16 @@
 const cart = {};
 
 function addToCart(itemName, itemPrice) {
+    Swal.fire({
+        icon: "success",
+        title: "Termék hozzáadva!"
+    });
     if (cart[itemName]) {
         cart[itemName].quantity++;
     } else {
         cart[itemName] = { price: itemPrice, quantity: 1 };
     }
-    updateCartDisplay();
+    updateCartCounter(); // Update the counter
 }
 
 function showOrderTypeModal() {
@@ -14,80 +18,32 @@ function showOrderTypeModal() {
     modal.style.display = 'flex';
 }
 
-function updateCartDisplay() {
-    const cartList = document.getElementById('cart-list');
-    cartList.innerHTML = '';
-
-    for (const [itemName, itemData] of Object.entries(cart)) {
-        const li = document.createElement('li');
-        li.textContent = `${itemName} x${itemData.quantity} - ${itemData.price * itemData.quantity} Ft`;
-
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'X';
-        deleteButton.style.color = 'white';
-        deleteButton.style.fontSize = '20px';
-        deleteButton.style.width = '30px';
-        deleteButton.style.height = '30px';
-        deleteButton.style.backgroundColor = 'red';
-        deleteButton.style.border = 'none';
-        deleteButton.style.borderRadius = '5px';
-        deleteButton.style.marginLeft = '10px';
-        deleteButton.style.cursor = 'pointer';
-
-        deleteButton.onclick = () => {
-            if (cart[itemName].quantity > 1) {
-                cart[itemName].quantity--;
-            } else {
-                delete cart[itemName];
-            }
-            updateCartDisplay();
-        };
-
-        li.appendChild(deleteButton);
-        cartList.appendChild(li);
-    }
-
-    const totalPrice = document.getElementById('total-price');
-    totalPrice.textContent = `Végösszeg: ${Object.values(cart).reduce((total, item) => total + item.price * item.quantity, 0)} Ft`;
+function updateCartCounter() {
+    const cartCounter = document.getElementById('cart-counter');
+    const totalItems = Object.values(cart).reduce((sum, item) => sum + item.quantity, 0);
+    cartCounter.textContent = totalItems;
 }
 
 function setOrderType(type) {
+    const uploadedItems = Object.entries(cart)
+      .map(([itemName, itemData]) => `${itemName} x${itemData.quantity}`)
+      .join('\n');
     uploadedTakeway = type;
     localStorage.setItem('orderType', type);
   
     const modal = document.getElementById('order-type-modal');
     modal.style.display = 'none';
   
-    const uploadedItems = Object.entries(cart)
-      .map(([itemName, itemData]) => `${itemName} x${itemData.quantity}`)
-      .join('\n');
   
     const uploadedTotalCost = Object.values(cart).reduce(
       (total, item) => total + item.price * item.quantity,
       0
     );
-  
+
     console.log(uploadedTakeway);
     console.log(uploadedItems);
     console.log(uploadedTotalCost);
   
-    // Prepare data for API
-    
-    // Send POST request to API
-    // fetch('/api/uploadneworder', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(orderData)
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   console.log('Order uploaded successfully:', data);
-    // })
-    // .catch(error => {
-    //   console.error('Error uploading order:', error);
-    // });
     const orderData = {
       uploadedTakeway: uploadedTakeway,
       uploadedItems: uploadedItems,
@@ -109,18 +65,157 @@ function setOrderType(type) {
     xmlhttp.open("POST","http://localhost:5154/api/uploadneworder",true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.send(JSON.stringify(orderData));
-  
+
+    
+    
     Object.keys(cart).forEach(key => delete cart[key]);
     localStorage.removeItem('orderType');
-    updateCartDisplay();
+    Swal.fire({
+        icon: "success",
+        title: "Sikeres rendelés!",
+        text: "Köszönjük, hogy minket válaszott :)"
+      });
   }
   
 
 function checkout() {
-  const modal = document.getElementById('order-type-modal');
-  modal.style.display = 'flex';
+    const uploadedItems = Object.entries(cart)
+      .map(([itemName, itemData]) => `${itemName} x${itemData.quantity}`)
+      .join('\n');
+    if(uploadedItems == "")
+        {
+            Swal.fire({
+                icon: "error",
+                title: "Hupsz!",
+                text: "Nem adtál még semmit a kosaradhoz!",
+            });
+            return;
+        }
+        else
+        {
+            const modal = document.getElementById('order-type-modal');
+            modal.style.display = 'flex';
+            const cartmodal = document.getElementById('cart-modal');
+            cartmodal.style.display = 'none';
+        }
 }
 
 function cancel() {
     localStorage.removeItem('orderType');
+    Object.keys(cart).forEach(key => delete cart[key]);
+}
+
+// function showCartModal() {
+//     const modal = document.getElementById('cart-modal');
+//     const cartList = document.getElementById('cart-modal-list');
+//     const totalPrice = document.getElementById('cart-modal-total-price');
+
+//     cartList.innerHTML = ''; // Clear the current list
+
+//     for (const [itemName, itemData] of Object.entries(cart)) {
+//         const li = document.createElement('li');
+//         li.textContent = `${itemName} x${itemData.quantity} - ${itemData.price * itemData.quantity} Ft`;
+
+//         // Create the delete button
+//         const deleteButton = document.createElement('button');
+//         deleteButton.textContent = 'X';
+//         deleteButton.style.color = 'white';
+//         deleteButton.style.fontSize = '20px';
+//         deleteButton.style.width = '30px';
+//         deleteButton.style.height = '30px';
+//         deleteButton.style.backgroundColor = 'red';
+//         deleteButton.style.border = 'none';
+//         deleteButton.style.borderRadius = '5px';
+//         deleteButton.style.marginLeft = '10px';
+//         deleteButton.style.cursor = 'pointer';
+
+//         // Add functionality to the delete button
+//         deleteButton.onclick = () => {
+//             if (cart[itemName].quantity > 1) {
+//                 cart[itemName].quantity--; // Decrease quantity
+//             } else {
+//                 delete cart[itemName]; // Remove item from cart
+//             }
+//             showCartModal(); // Refresh the modal content
+//         };
+
+//         li.appendChild(deleteButton); // Add the delete button to the list item
+//         cartList.appendChild(li); // Add the list item to the cart list
+//     }
+
+//     // Update the total price
+//     totalPrice.textContent = `Végösszeg: ${Object.values(cart).reduce((total, item) => total + item.price * item.quantity, 0)} Ft`;
+
+//     modal.style.display = 'flex'; // Show the modal
+// }
+
+function showCartModal() {
+    const modal = document.getElementById('cart-modal');
+    const cartList = document.getElementById('cart-modal-list');
+    const totalPrice = document.getElementById('cart-modal-total-price');
+
+    cartList.innerHTML = ''; // Clear the current list
+
+    for (const [itemName, itemData] of Object.entries(cart)) {
+        const li = document.createElement('li');
+        li.textContent = `${itemName} x${itemData.quantity} - ${itemData.price * itemData.quantity} Ft`;
+
+        // Create the delete button (red "X")
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = '-';
+        deleteButton.style.color = 'white';
+        deleteButton.style.fontSize = '20px';
+        deleteButton.style.width = '30px';
+        deleteButton.style.height = '30px';
+        deleteButton.style.backgroundColor = 'red';
+        deleteButton.style.border = 'none';
+        deleteButton.style.borderRadius = '5px';
+        deleteButton.style.marginLeft = '10px';
+        deleteButton.style.cursor = 'pointer';
+
+        // Add functionality to the delete button
+        deleteButton.onclick = () => {
+            if (cart[itemName].quantity > 1) {
+                cart[itemName].quantity--; // Decrease quantity
+            } else {
+                delete cart[itemName]; // Remove item from cart
+            }
+            updateCartCounter(); // Update the counter
+            showCartModal(); // Refresh the modal content
+        };
+
+        // Create the add button (green "+")
+        const addButton = document.createElement('button');
+        addButton.textContent = '+';
+        addButton.style.color = 'white';
+        addButton.style.fontSize = '20px';
+        addButton.style.width = '30px';
+        addButton.style.height = '30px';
+        addButton.style.backgroundColor = 'green';
+        addButton.style.border = 'none';
+        addButton.style.borderRadius = '5px';
+        addButton.style.marginLeft = '10px';
+        addButton.style.cursor = 'pointer';
+
+        // Add functionality to the add button
+        addButton.onclick = () => {
+            cart[itemName].quantity++; // Increase quantity
+            updateCartCounter(); // Update the counter
+            showCartModal(); // Refresh the modal content
+        };
+
+        li.appendChild(deleteButton); // Add the delete button to the list item
+        li.appendChild(addButton); // Add the add button to the list item
+        cartList.appendChild(li); // Add the list item to the cart list
+    }
+
+    // Update the total price
+    totalPrice.textContent = `Végösszeg: ${Object.values(cart).reduce((total, item) => total + item.price * item.quantity, 0)} Ft`;
+
+    modal.style.display = 'flex'; // Show the modal
+}
+
+function closeCartModal() {
+    const modal = document.getElementById('cart-modal');
+    modal.style.display = 'none';
 }
