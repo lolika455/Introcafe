@@ -115,56 +115,30 @@ namespace WpfApp1
             return tabla;
         }
 
-        public bool CheckOrderId(int sorszam, MySqlConnection con)
-        {
-            string query = $"SELECT COUNT(*) FROM introcafe.upload_orders WHERE uploadedOrderId = {sorszam}";
+        //public bool CheckOrderId(int sorszam, MySqlConnection con)
+        //{
+        //    string query = $"SELECT COUNT(*) FROM introcafe.upload_orders WHERE uploadedOrderId = {sorszam}";
 
-            using (MySqlCommand cmd = new MySqlCommand(query, con))
-            {
-                int count = Convert.ToInt32(cmd.ExecuteScalar());
-                return count > 0; // True if the ID exists, False if it's available
-            }
-        }
+        //    using (MySqlCommand cmd = new MySqlCommand(query, con))
+        //    {
+        //        int count = Convert.ToInt32(cmd.ExecuteScalar());
+        //        return count > 0; // True if the ID exists, False if it's available
+        //    }
+        //}
 
         public void AdatbazisbaFelvetel(string kuldeslista, int totalCost, string fogyasztastipus)
         {
             using (MySqlConnection con = GetConnection())
             {
-                try
-                {
                     con.Open();
-
-                    int maxRetries = 1002;
-                    int retryCount = 0;
-                    int sorszam;
-                    Random random = new Random();
-
-                    do
-                    {
-                        sorszam = random.Next(1, 1000);
-                        retryCount++;
-
-                        if (retryCount >= maxRetries)
-                        {
-                            MessageBox.Show("Nincs több szabad ID!");
-                            return;
-                        }
-                    }
-                    while (CheckOrderId(sorszam, con));
-
-                    string query = $"INSERT INTO introcafe.upload_orders (uploadedOrderId, uploadedItems, uploadedTakeway," +
-                        $"uploadedTotalCost) VALUES ({sorszam},'{kuldeslista}','{fogyasztastipus}',{totalCost})";
+                    string query = $"INSERT INTO introcafe.upload_orders (uploadedItems, uploadedTakeway," +
+                        $"uploadedTotalCost) VALUES ('{kuldeslista}','{fogyasztastipus}',{totalCost})";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         int rowsAffected = cmd.ExecuteNonQuery();
-                        Console.WriteLine($"{rowsAffected} row added, OrderId: {sorszam}");
+                        Console.WriteLine($"{rowsAffected} rows deleted.");
                     }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
             }
         }
     }
