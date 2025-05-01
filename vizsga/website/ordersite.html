@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introcafe</title>
+    <link rel="stylesheet" href="./css/ordercss.css" />
+    <script src="./js/orderjs.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div id="order-type-modal" class="modal">
+        <div class="modal-content">
+            <h2>Válassza ki a rendelés típusát</h2>
+            <div class="modal-buttons">
+                <button onclick="setOrderType('Elvitel')" class="modal-button">Elvitel<img src="./img/takeway.png"
+                        class="ordericons"></button>
+                <button onclick="setOrderType('Helyben')" class="modal-button">Helyben<img src="./img/dinein.png"
+                        class="ordericons"></button>
+            </div>
+        </div>
+    </div>
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <h2>Kosár</h2>
+            <ul id="cart-modal-list"></ul>
+            <h2 id="cart-modal-total-price">Végösszeg: 0 Ft</h2>
+            <button onclick="checkout()" class="checkout">Rendelés leadása</button>
+            <button onclick="closeCartModal()" class="cancel">Bezárás</button>
+        </div>
+    </div>
+    <header>
+        <img src="./img/logo_dark.png" class="header-img" alt="Logo">
+        <div class="cart-icon-link" onclick="showCartModal()">
+            <img src="./img/cart.png" class="cart-icon" alt="Cart Icon">
+            <span id="cart-counter" class="cart-counter">0</span>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="product-list">
+            <h2>Termékek</h2>
+            <div class="product-grid">
+                <div class="product-item" onclick="addToCart('Espresso', 500)">
+                    <img src="./img/espresso.png" alt="Espresso" class="product-img" />
+                    <span>Espresso</span>
+                    <span>500 Ft</span>
+                </div>
+                <div class="product-item" onclick="addToCart('Latte', 650)">
+                    <img src="./img/latte.png" alt="Latte" class="product-img" />
+                    <span>Latte</span>
+                    <span>650 Ft</span>
+                </div>
+                <div class="product-item" onclick="addToCart('Matcha Latte', 800)">
+                    <img src="./img/matchalatte.png" alt="Matcha Latte" class="product-img" />
+                    <span>Matcha Latte</span>
+                    <span>800 Ft</span>
+                </div>
+                <div class="product-item" onclick="addToCart('Americano', 600)">
+                    <img src="./img/americano.png" alt="Americano" class="product-img" />
+                    <span>Americano</span>
+                    <span>600 Ft</span>
+                </div>
+                <div class="product-item" onclick="addToCart('Ír kávé', 950)">
+                    <img src="./img/irish.png" alt="Ír kávé" class="product-img" />
+                    <span>Ír kávé</span>
+                    <span>950 Ft</span>
+                </div>
+                <div class="product-item" onclick="addToCart('Pisztáciás muffin', 1000)">
+                    <img src="./img/pisztaciamuffin.png" alt="Pisztáciás Muffin" class="product-img" />
+                    <span>Pisztáciás muffin</span>
+                    <span>1000 Ft</span>
+                </div>
+                <div class="product-item" onclick="addToCart('Habtorta', 1100)">
+                    <img src="./img/habtorta.png" alt="Habtorta" class="product-img" />
+                    <span>Habtorta</span>
+                    <span>1100 Ft</span>
+                </div>
+                <div class="product-item" onclick="addToCart('Málnás Brownie', 1150)">
+                    <img src="./img/malnasbrownie.png" alt="Málnás Brownie" class="product-img" />
+                    <span>Málnás Brownie</span>
+                    <span>1150 Ft</span>
+                </div>
+                <div class="product-item" onclick="addToCart('Meggyes-Csokis Golyó', 1050)">
+                    <img src="./img/meggycsokigolyo.png" alt="Meggyes-Csokis Golyó" class="product-img" />
+                    <span>Meggyes-Csokis Golyó</span>
+                    <span>1050 Ft</span>
+                </div>
+                <div class="product-item" onclick="addToCart('Kávé szelet', 1200)">
+                    <img src="./img/kaveszelet.png" alt="Kávészelet" class="product-img" />
+                    <span>Kávészelet</span>
+                    <span>1200 Ft</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="./index.html">
+        <button onclick="cancel()" class="cancel" id="cancel-button">Rendelés törlése</button>
+    </a>
+</body>
+</html>
