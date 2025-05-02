@@ -1,10 +1,14 @@
 const cart = {};
 
 function addToCart(itemName, itemPrice) {
+    let timerInterval;
     Swal.fire({
-        icon: "success",
-        title: "Termék hozzáadva!"
-    });
+    title: "Termék hozzáadva!",
+    timer: 2000,
+    willClose: () => {
+    clearInterval(timerInterval);
+    }});
+
     if (cart[itemName]) {
         cart[itemName].quantity++;
     } else {

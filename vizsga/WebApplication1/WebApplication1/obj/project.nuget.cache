@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pmcgwVtL+Cg=",
+  "dgSpecHash": "Qq9M/WNGPaU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\lukov\\OneDrive\\Desktop\\vizsgaremekmu\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+  "projectFilePath": "C:\\Users\\lukov\\OneDrive\\Desktop\\vizsga\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lukov\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
     "C:\\Users\\lukov\\.nuget\\packages\\google.protobuf\\3.26.1\\google.protobuf.3.26.1.nupkg.sha512",

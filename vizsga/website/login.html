@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login System</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="auth-container">
         <div id="registration-form" class="auth-form">
-            <h2>Register</h2>
+            <h2>Regisztráció</h2>
             <input type="email" id="register-email" placeholder="Email" required>
             <input type="password" id="register-password" placeholder="Jelszó" required>
             <button onclick="register()">Regisztráció</button>
@@ -17,11 +18,11 @@
         </div>
 
         <div id="login-form" class="auth-form" style="display: none;">
-            <h2>Login</h2>
+            <h2>Bejelentkezés</h2>
             <input type="email" id="login-email" placeholder="Email" required>
-            <input type="password" id="login-password" placeholder="Password" required>
-            <button onclick="login()">Login</button>
-            <p>Don't have an account? <a href="#" onclick="showRegister()">Register here</a></p>
+            <input type="password" id="login-password" placeholder="Jelszó" required>
+            <button onclick="login()">Bejelentkezés</button>
+            <p>Még nincs fiókod? <a href="#" onclick="showRegister()">Itt megteheted c;</a></p>
         </div>
     </div>
     <script src="js/auth.js"></script>
