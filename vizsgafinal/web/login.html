@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="auth-container">
+        <div id="registration-form" class="auth-form">
+            <h2 style="color: black;">Regisztráció</h2>
+            <input type="email" id="register-email" placeholder="Email" required>
+            <input type="password" id="register-password" placeholder="Jelszó" required>
+            <button onclick="register()">Regisztráció</button>
+            <p>Már van fiókod? <a href="#" onclick="showLogin()">Kattins ide!</a></p>
+        </div>
+
+        <div id="login-form" class="auth-form" style="display: none;">
+            <h2 style="color: black;">Bejelentkezés</h2>
+            <input type="email" id="login-email" placeholder="Email" required>
+            <input type="password" id="login-password" placeholder="Jelszó" required>
+            <button onclick="login()">Bejelentkezés</button>
+            <p>Még nincs fiókod? <a href="#" onclick="showRegister()">Itt megteheted c;</a></p>
+        </div>
+    </div>
+    <script src="js/auth.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const show = urlParams.get('show');
+
+        if (show === 'login') {
+            showLogin();
+        }
+    </script>
+</body>
+</html>
